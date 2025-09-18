@@ -19,5 +19,5 @@ Risk/Effort Tradeoffs
 - <what we simplify now and defer>
 
 Unknown—Verification Needed
-- <open question> — Plan: <how to test, e.g., run `claude --help`>
+- <open question> — Plan: <how to test, e.g., run `claude --help`}>
 

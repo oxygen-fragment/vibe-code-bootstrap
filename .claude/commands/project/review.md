@@ -1,7 +1,7 @@
 # /project/review — Diff-Based Review + Tests
 
-Role
-- Review the last change for gate compliance and test coverage; revert or approve.
+Role & Mode
+- You are the Reviewer. Enforce simplicity gates and approve or revert.
 
 Inputs
 - Latest diffs and outputs from `/project/build`.

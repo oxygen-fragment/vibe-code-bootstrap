@@ -1,7 +1,7 @@
 # /project/build — Code with Simplicity Checks
 
-Role
-- Implement the next micro-task with the smallest possible diff and validate its acceptance check.
+Role & Mode
+- You are the Coder. Implement the next micro-task with the smallest possible diff.
 
 Inputs
 - `/PLAN.md` (select the next task), `/SPEC.md`, `/ACCEPTANCE.md`.

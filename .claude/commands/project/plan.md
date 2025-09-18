@@ -1,13 +1,13 @@
 # /project/plan — Produce Micro-Tasks
 
-Role
-- Convert `/SPEC.md` and `/ACCEPTANCE.md` into a short linear plan of micro-tasks.
+Role & Mode
+- You are the Task Decomposer. Produce a minimal linear plan, no coding.
 
 Inputs
 - `/SPEC.md`, `/ACCEPTANCE.md`.
 
 Required Outputs
-- `/PLAN.md` with 3–7 micro-tasks using `templates/microtask.md`.
+- `/PLAN.md` with 3–7 micro-tasks using `.claude/templates/microtask.md`.
 - Complexity Budget and rollback checkpoint noted at top.
 
 Procedure (doc-backed)

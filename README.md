@@ -21,20 +21,20 @@ Quick Start
 - Run: `claude --help` and optionally `claude code --help`.
 
 2) Initialize Project Spec
-- Run (path invocation): `claude bmad-lite/commands/project/init.md`
+- Run (path invocation): `claude .claude/commands/project/init.md`
 - If your CLI does not support direct path invocation, open the file in Claude Code and run it as a slash command. unknown—verification needed; confirm via `claude --help`.
 - Answer short questions. The command creates `SPEC.md` and `ACCEPTANCE.md` at the repo root.
 
 3) Plan Micro‑Tasks
-- Run: `claude bmad-lite/commands/project/plan.md`
+- Run: `claude .claude/commands/project/plan.md`
 - Produces `PLAN.md` with 3–7 micro‑tasks based on `templates/microtask.md` and sets a complexity budget and rollback checkpoint.
 
 4) Build the Next Task
-- Run: `claude bmad-lite/commands/project/build.md`
+- Run: `claude .claude/commands/project/build.md`
 - Implements the smallest possible diff to satisfy the current task’s acceptance check, and shows minimal evidence (command output snippet).
 
 5) Review and Gate
-- Run: `claude bmad-lite/commands/project/review.md`
+- Run: `claude .claude/commands/project/review.md`
 - Enforces gates: no new deps unless approved, change size within budget, acceptance evidence present. Approves or proposes revert with a smaller alternative.
 
 Guardrails (enforced by commands and agents)
@@ -44,10 +44,10 @@ Guardrails (enforced by commands and agents)
 - Rollback: if gates fail, revert immediately and propose the smallest successful path.
 
 Repository Structure
-- `bmad-lite/CLAUDE.md` — Local policies, tool use, and verification tests.
-- `bmad-lite/agents/*.md` — Role prompts for each agent phase.
-- `bmad-lite/commands/project/*.md` — Slash commands that orchestrate each phase.
-- `bmad-lite/templates/*.md` — Templates for `SPEC.md`, `PLAN.md` tasks, and `ACCEPTANCE.md`.
+- `.claude/CLAUDE.md` — Local policies, tool use, and verification tests.
+- `.claude/agents/*.md` — Role prompts for each agent phase.
+- `.claude/commands/project/*.md` — Slash commands that orchestrate each phase.
+- `.claude/templates/*.md` — Templates for `SPEC.md`, `PLAN.md` tasks, and `ACCEPTANCE.md`.
 
 Typical Flow
 - Start: `init` to create `SPEC.md` and `ACCEPTANCE.md` → `plan` to create `PLAN.md` → loop over `build` then `review` per micro‑task until MVP acceptance passes → feature-freeze or proceed with strictly scoped improvements.
@@ -61,4 +61,3 @@ Notes
 - Keep acceptance tests concrete (exact commands/outputs).
 - Prefer editing existing files over adding new ones when feasible.
 - Summarize tool outputs; avoid long logs.
-

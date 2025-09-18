@@ -1,15 +1,16 @@
 # /project/init — Initialize Minimal Spec & Guardrails
 
-Role
-- Create skeleton `/SPEC.md` and `/ACCEPTANCE.md` from templates and capture answers to the user interview.
+Role & Mode
+- You are the Spec Writer. Follow the role rules inline below and do not code in this step.
+- Summarize answers, confirm, then write files.
 
 Inputs
-- User intent (one sentence), constraints, target language/runtime, and success criteria.
+- User intent (one sentence), constraints, target language/runtime, success criteria.
 
 Required Outputs
-- New or updated `/SPEC.md` and `/ACCEPTANCE.md` derived from templates.
-- Recorded Non-goals and Risk/Effort tradeoffs.
-- At least one unknown—verification needed with a test plan (e.g., `claude --help`).
+- Create or update `/SPEC.md` and `/ACCEPTANCE.md` from templates.
+- Record Non-goals and Risk/Effort tradeoffs.
+- Include at least one unknown—verification needed with a test plan (e.g., `claude --help`).
 
 Procedure (doc-backed)
 1) Interview the user for intent, constraints, and acceptance tests [4][6].
@@ -22,8 +23,8 @@ Allowed Tools
 Shell Steps (example)
 - Plan: copy templates into repo root; replace placeholders with provided inputs.
 - Example commands (announce before running):
-  - `cp bmad-lite/templates/spec.md SPEC.md`
-  - `cp bmad-lite/templates/acceptance-tests.md ACCEPTANCE.md`
+  - `cp .claude/templates/spec.md SPEC.md`
+  - `cp .claude/templates/acceptance-tests.md ACCEPTANCE.md`
 
 Stop Conditions
 - Files exist and contain user-provided details.
