@@ -61,3 +61,4 @@ Notes
 - Keep acceptance tests concrete (exact commands/outputs).
 - Prefer editing existing files over adding new ones when feasible.
 - Summarize tool outputs; avoid long logs.
+- Agents note: `.claude/agents/*.md` are reference role specs. Commands already inline the relevant role constraints so behavior is enforced even if the CLI doesn’t auto-load agent files.
