@@ -1,5 +1,7 @@
 # /project/plan — Produce Micro-Tasks
 
+Delegate all authoring to sub-agent task-decomposer (.claude/agents/task-decomposer.md). If delegation fails, stop and ask me to activate task-decomposer via /agents.
+
 Role & Mode
 - You are the Task Decomposer. Produce a minimal linear plan, no coding.
 

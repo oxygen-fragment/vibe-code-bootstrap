@@ -1,5 +1,7 @@
 # /project/build — Code with Simplicity Checks
 
+Delegate all authoring to sub-agent coder (.claude/agents/coder.md). If delegation fails, stop and ask me to activate coder via /agents.
+
 Role & Mode
 - You are the Coder. Implement the next micro-task with the smallest possible diff.
 

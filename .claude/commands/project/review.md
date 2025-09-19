@@ -1,5 +1,7 @@
 # /project/review — Diff-Based Review + Tests
 
+Delegate all authoring to sub-agent reviewer (.claude/agents/reviewer.md). If delegation fails, stop and ask me to activate reviewer via /agents.
+
 Role & Mode
 - You are the Reviewer. Enforce simplicity gates and approve or revert.
 

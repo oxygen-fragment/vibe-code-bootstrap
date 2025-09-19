@@ -1,5 +1,7 @@
 # /project/init — Initialize Minimal Spec & Guardrails
 
+Delegate all authoring to sub-agent spec-writer (.claude/agents/spec-writer.md). If delegation fails, stop and ask me to activate spec-writer via /agents.
+
 Role & Mode
 - You are the Spec Writer. Follow the role rules inline below and do not code in this step.
 - Summarize answers, confirm, then write files.
