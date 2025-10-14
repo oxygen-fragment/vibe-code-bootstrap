@@ -36,7 +36,7 @@ elif [[ "${1-}" == "--interactive" ]]; then
 fi
 
 # 0) sanity
-[ -d ".claude" ] || { err "Missing .claude/ in this directory. Copy the boilerplate first."; exit 1; }
+[ -d "template/.claude" ] || { err "Missing template/.claude/ in this directory. Copy the boilerplate first."; exit 1; }
 [ -f "CLAUDE.md" ] || { err "Missing CLAUDE.md in this directory."; exit 1; }
 [ -f "mcp.tools.json" ] || { warn "mcp.tools.json not found; creating defaults."; cat > mcp.tools.json <<'JSON'
 {
@@ -112,8 +112,8 @@ ensure_gitignore() {
     case "${ans:-}" in
       n|N) ;;
       *)
-        if [[ -f templates/gitignore-minimal ]]; then
-          cp templates/gitignore-minimal .gitignore && say "Created .gitignore (from templates/gitignore-minimal)."
+        if [[ -f template/templates/gitignore-minimal ]]; then
+          cp template/templates/gitignore-minimal .gitignore && say "Created .gitignore (from template/templates/gitignore-minimal)."
         else
           cat > .gitignore <<'GITIGNORE'
 # OS artifacts
@@ -160,7 +160,7 @@ GITIGNORE
         ;;
     esac
   else
-    warn "No .gitignore found. To add one: cp templates/gitignore-minimal .gitignore"
+    warn "No .gitignore found. To add one: cp template/templates/gitignore-minimal .gitignore"
   fi
 }
 

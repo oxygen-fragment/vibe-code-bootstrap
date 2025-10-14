@@ -8,9 +8,10 @@ Overview
 - Guardrails: no new deps (by default), small diffs, MVP-first, fast rollback
 
 Add To Your Project (copy these files)
-- Required: copy the entire `.claude/` folder and the `CLAUDE.md` file into the folder of your own project (your repository).
-- Recommended (for guided setup): also copy `vibe_bootstrap.sh`, the `scripts/` folder, `mcp.tools.json`, and the `templates/` folder. These add the one‑liner setup and onboarding helper.
-- That’s it — no other tools or servers are required.
+- Required: copy `template/.claude/` folder and `template/CLAUDE.md` into the root of your own project (your repository).
+- Recommended (for guided setup): also copy `vibe_bootstrap.sh`, the `scripts/` folder, `template/mcp.tools.json`, and the `template/templates/` folder. These add the one‑liner setup and onboarding helper.
+- That's it — no other tools or servers are required.
+- Note: The root `.claude/` directory in this repo is for vibe-bootstrap development only; user projects get the distribution from `template/`.
 
 Prerequisites
 - Claude Code CLI installed and authenticated. See Anthropic docs: Overview/CLI Reference/Setup/Slash Commands/Tool Use/Best Practices.
@@ -22,8 +23,8 @@ Prerequisites
   - https://www.anthropic.com/engineering/claude-code-best-practices (best practices)
 
 Non-Technical Quick Start (no extra setup)
-- First, copy `.claude/` + `CLAUDE.md` (and optionally `vibe_bootstrap.sh` + `scripts/`) into your project folder.
-- No MCP servers required. This works out-of-the-box using Claude Code’s local tools.
+- First, copy `template/.claude/` + `template/CLAUDE.md` (and optionally `vibe_bootstrap.sh` + `scripts/`) into your project folder.
+- No MCP servers required. This works out-of-the-box using Claude Code's local tools.
 - Easiest path: run `bash vibe_bootstrap.sh` (no need for chmod), then paste `/project:init` into Claude Code.
 - Non-interactive: `bash vibe_bootstrap.sh --defaults` (applies defaults and offers onboarding).
 - In an interactive terminal, the script offers to run onboarding immediately.
@@ -57,10 +58,14 @@ Guardrails (enforced by commands and agents)
 - Rollback: if gates fail, revert immediately and propose the smallest successful path.
 
 Repository Structure
-- `CLAUDE.md` — Local policies, tool use, and verification tests.
-- `.claude/agents/*.md` — Role prompts for each agent phase.
-- `.claude/commands/project/*.md` — Slash commands that orchestrate each phase.
-- `.claude/templates/*.md` — Templates for `SPEC.md`, `PLAN.md` tasks, and `ACCEPTANCE.md`.
+- `template/` — Distribution artifacts copied to user projects
+  - `template/.claude/agents/*.md` — Role prompts for each agent phase
+  - `template/.claude/commands/project/*.md` — Slash commands that orchestrate each phase
+  - `template/.claude/templates/*.md` — Templates for `SPEC.md`, `PLAN.md` tasks, and `ACCEPTANCE.md`
+  - `template/CLAUDE.md` — Local policies, tool use, and verification tests
+  - `template/mcp.tools.json` — Optional MCP tool mappings
+  - `template/templates/` — Additional project templates (e.g., .gitignore)
+- `.claude/` — Development config for working on vibe-bootstrap itself (not distributed)
 
 Typical Flow
 - Start: `init` to create `SPEC.md` and `ACCEPTANCE.md` → `plan` to create `PLAN.md` → loop over `build` then `review` per micro‑task until MVP acceptance passes → feature-freeze or proceed with strictly scoped improvements.
