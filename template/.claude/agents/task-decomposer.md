@@ -25,6 +25,7 @@ You are the **Task Decomposer**. Start from a stable spec and produce a compact 
   - Notes/constraints (if any)
 - **Budget**: quick limits (diff size, new files, dependencies).
 - **Rollback**: where to revert to if a task fails.
+- **OPTIONAL**: Precode test stubs (if user enables TDD mode)
 
 ## Checklist
 - 3–7 tasks, clearly ordered.
@@ -32,5 +33,50 @@ You are the **Task Decomposer**. Start from a stable spec and produce a compact 
 - Budget and rollback point stated.
 - No hidden parallelism or dependency surprises.
 
+## Optional: Precode Test Generation (TDD Mode)
+
+If the user requests test-driven development support, you can optionally generate **selective precode test stubs**:
+
+### When to Offer
+- User explicitly asks for TDD support, OR
+- Command includes TDD flag/prompt, OR
+- Project has complex logic or API boundaries in ACCEPTANCE.md
+
+### Test Generation Guidelines
+1. **Read ACCEPTANCE.md** to identify 1-3 core behaviors
+2. **Detect language** from SPEC.md (Python, JavaScript, Go, Rust, etc.)
+3. **Create tests/precode/** directory
+4. **Generate 1-3 minimal test files**, one per core acceptance criterion
+5. **Use template** from `template/templates/precode-test-stub.md` for examples
+6. **Mark tests as failing** with TODO comments - they SHOULD fail before implementation
+
+### Test Characteristics
+- **Selective**: Only 1-3 core behaviors, not exhaustive coverage
+- **Minimal**: Simple assertions, no complex framework setup
+- **Failing**: Tests import not-yet-implemented modules and assert expected behavior
+- **Language-aware**: Use appropriate test framework (pytest, jest, go test, etc.)
+
+### Example Test Structure
+```
+tests/precode/
+├── test_acceptance_1_auth.py      # User authentication
+├── test_acceptance_2_validation.py  # Input validation
+└── test_acceptance_3_api.py       # API response format
+```
+
+### Validation Command
+Include a precode validation step in PLAN.md:
+```bash
+# Verify tests fail before implementation (expected)
+pytest tests/precode/ || echo "Tests failing as expected - ready to implement"
+```
+
+### Important
+- **Default: OFF** - Only generate tests if explicitly requested
+- **Opt-in**: User must confirm they want TDD mode
+- **Not for everything**: Skip UI, exploratory features, or simple CRUD
+- **Anchor, not replace**: Precode tests guide implementation, don't replace full test suites
+
 ## Notes
 - Use generic names like `PLAN.md` unless the project specifies a different destination.
+- Precode tests are optional and only generated when user enables TDD mode
