@@ -3,8 +3,10 @@
 A constraint-driven coding pipeline designed for the Claude Code CLI that enforces “simplest working solution wins.” It interviews the user, decomposes work, and coordinates agents to produce specs, micro‑tasks, code, and reviews.
 
 Overview
-- Phases: init → plan → build → review
+- **Autopilot mode**: Run `/project:next` and it tells you what to do next
+- Phases: init → plan → build → review (or just follow /project:next guidance)
 - Roles: spec-writer → task-decomposer → coder → reviewer
+- Progress tracking: PROGRESS.md auto-generated for agent-to-agent context
 - Guardrails: no new deps (by default), small diffs, MVP-first, fast rollback
 
 Add To Your Project (copy these files)
@@ -30,26 +32,40 @@ Non-Technical Quick Start (no extra setup)
 - In an interactive terminal, the script offers to run onboarding immediately.
 - If a `.gitignore` is missing, the script can create a minimal one for you.
 
-Quick Start
-1) Verify CLI
-- Run: `claude --help` and optionally `claude code --help`.
+Quick Start (Autopilot Mode - Recommended)
+1) Verify CLI: `claude --help`
 
-2) Initialize Project Spec
-- Run (path invocation): `claude .claude/commands/project/init.md`
-- If your CLI does not support path invocation, open the file in Claude Code and run it as a slash command (paste the contents into the chat input).
-- Answer short questions. The command creates `SPEC.md` and `ACCEPTANCE.md` at the repo root.
+2) Start your project: `claude .claude/commands/project/init.md`
+   - Answer a few questions to create `SPEC.md` and `ACCEPTANCE.md`
+   - Optionally define a project vibe (tone, style, constraints)
 
-3) Plan Micro‑Tasks
-- Run: `claude .claude/commands/project/plan.md`
-- Produces `PLAN.md` with 3–7 micro‑tasks based on `templates/microtask.md` and sets a complexity budget and rollback checkpoint.
+3) Let autopilot guide you: `claude .claude/commands/project/next.md`
+   - Analyzes your project state (SPEC, PLAN, PROGRESS)
+   - Tells you exactly what to run next
+   - Just keep running `/project:next` until your MVP is complete
 
-4) Build the Next Task
-- Run: `claude .claude/commands/project/build.md`
-- Implements the smallest possible diff to satisfy the current task’s acceptance check, and shows minimal evidence (command output snippet).
+That's it! The autopilot mode eliminates decision-making fatigue.
 
-5) Review and Gate
-- Run: `claude .claude/commands/project/review.md`
-- Enforces gates: no new deps unless approved, change size within budget, acceptance evidence present. Approves or proposes revert with a smaller alternative.
+Manual Mode (Expert Users)
+If you prefer explicit control, run commands directly:
+
+1) **Init**: `claude .claude/commands/project/init.md`
+   - Creates `SPEC.md` and `ACCEPTANCE.md`
+   - Optional: Define project vibe in `.claude/vibe.md`
+
+2) **Plan**: `claude .claude/commands/project/plan.md`
+   - Produces `PLAN.md` with 3–7 micro-tasks
+   - Optional: Generate precode test stubs for TDD mode
+
+3) **Build**: `claude .claude/commands/project/build.md`
+   - Implements the next task with minimal diff
+   - Logs progress to `PROGRESS.md`
+
+4) **Review**: `claude .claude/commands/project/review.md`
+   - Enforces gates: deps, complexity budget, acceptance checks
+   - Approves or proposes revert with smaller alternative
+
+5) **Repeat**: Build → Review until all tasks complete
 
 Guardrails (enforced by commands and agents)
 - Dependency policy: no new dependencies for MVP unless mandated by acceptance tests.
@@ -59,16 +75,47 @@ Guardrails (enforced by commands and agents)
 
 Repository Structure
 - `template/` — Distribution artifacts copied to user projects
-  - `template/.claude/agents/*.md` — Role prompts for each agent phase
-  - `template/.claude/commands/project/*.md` — Slash commands that orchestrate each phase
-  - `template/.claude/templates/*.md` — Templates for `SPEC.md`, `PLAN.md` tasks, and `ACCEPTANCE.md`
+  - `template/.claude/agents/*.md` — Role prompts (spec-writer, task-decomposer, coder, reviewer, router, documentarian)
+  - `template/.claude/commands/project/*.md` — Core workflow commands (12 total)
+  - `template/.claude/commands/docs/*.md` — Documentation commands
   - `template/CLAUDE.md` — Local policies, tool use, and verification tests
   - `template/mcp.tools.json` — Optional MCP tool mappings
-  - `template/templates/` — Additional project templates (e.g., .gitignore)
+  - `template/templates/*.md` — Templates for SPEC, PLAN, ACCEPTANCE, PROGRESS, DECISIONS, vibe.md
+  - `template/templates/comprehensive/*.md` — Advanced open-source templates (WORKFLOW, ARCHITECTURE, SECURITY, etc.)
 - `.claude/` — Development config for working on vibe-bootstrap itself (not distributed)
 
+Optional Features (Accordion Design)
+All advanced features are **opt-in** and never forced:
+- **Vibe Definition**: Define creative direction in `.claude/vibe.md` (asked during init)
+- **TDD Mode**: Generate precode test stubs (asked during plan)
+- **Comprehensive Docs**: Create full open-source structure with `/docs:scaffold-advanced`
+- **Decision Logging**: Track architectural decisions with `/docs:decision`
+- **Progress Tracking**: PROGRESS.md auto-generated (always enabled for agent context)
+
+Available Commands
+
+**Core Workflow (project/):**
+- `/project:next` - Autopilot navigator (tells you what to run next)
+- `/project:init` - Create SPEC.md and ACCEPTANCE.md
+- `/project:plan` - Break down spec into micro-tasks
+- `/project:build` - Implement the next task
+- `/project:review` - Gate check and approve/reject
+- `/project:doctor` - Diagnose workflow issues
+- `/project:help` - Show available commands
+
+**Documentation (docs/):**
+- `/docs:readme` - Draft or update README.md
+- `/docs:decision` - Log architectural decisions (ADR-style)
+- `/docs:scaffold-advanced` - Create comprehensive open-source docs
+
+**Operations (ops/):**
+- `/ops:route` - Route unclear intent to appropriate command
+- `/ops:adhoc` - Perform one-off micro-tasks
+
 Typical Flow
-- Start: `init` to create `SPEC.md` and `ACCEPTANCE.md` → `plan` to create `PLAN.md` → loop over `build` then `review` per micro‑task until MVP acceptance passes → feature-freeze or proceed with strictly scoped improvements.
+- **Autopilot**: Run `/project:next` repeatedly until MVP complete
+- **Manual**: init → plan → (build → review) × N → feature-freeze
+- **All workflows**: Auto-generate `PROGRESS.md` for agent context
 
 Verification & Troubleshooting
 - CLI flags and command discovery: run `claude --help`. If path-based execution is unsupported, open the Markdown file in Claude Code and run it as a slash command.

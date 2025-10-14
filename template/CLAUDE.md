@@ -9,17 +9,23 @@ Purpose
 Scope
 - Coordinates core agents: spec-writer → task-decomposer → coder → reviewer.
 - Adds supporting agents: router (routes intent) and documentarian (docs).
-- Provides project slash-commands in `.claude/commands/project/` for:
-  - `/project:init`
-  - `/project:plan`
-  - `/project:build`
-  - `/project:review`
-  - `/project:doctor`
-  - `/project:help`
-- Provides additional commands for in-between workflows:
-  - `/ops:route` → routes intent when unclear
-  - `/ops:adhoc` → perform one-off micro-tasks
+- **Autopilot mode**: `/project:next` analyzes state and guides workflow
+- **Progress tracking**: PROGRESS.md auto-generated for agent-to-agent context
+- Provides project slash-commands in `.claude/commands/project/`:
+  - `/project:next` → autopilot navigator (recommended workflow)
+  - `/project:init` → create SPEC.md and ACCEPTANCE.md (optional: vibe.md)
+  - `/project:plan` → break down spec into micro-tasks (optional: TDD mode)
+  - `/project:build` → implement next task
+  - `/project:review` → gate check and approve/reject
+  - `/project:doctor` → diagnose workflow issues
+  - `/project:help` → show available commands
+- Provides documentation commands in `.claude/commands/docs/`:
   - `/docs:readme` → draft or update README.md
+  - `/docs:decision` → log architectural decisions (ADR-style)
+  - `/docs:scaffold-advanced` → create comprehensive open-source docs
+- Provides operations commands for in-between workflows:
+  - `/ops:route` → route unclear intent to appropriate command
+  - `/ops:adhoc` → perform one-off micro-tasks
 
 References (Anthropic)
 - Claude Code overview/reference & quickstart: [5], [1], [2]
@@ -41,8 +47,10 @@ CLI Quickstart
 
 Slash Commands Conventions
 - Commands are Markdown files invoking a structured prompt [3].
-- Keep commands short, explicit, and chained (init → plan → build → review).
+- **Recommended workflow**: Use `/project:next` as autopilot (eliminates decision fatigue)
+- **Manual workflow**: Chain commands: init → plan → build → review
 - Each command describes: role, inputs, required outputs, stop conditions, allowed tools [3][4].
+- All commands log progress to PROGRESS.md for agent context sharing
 
 Tool Use Policy
 - Agents declare allowed tools in front-matter (`tools: filesystem, memory, …`) [4].
@@ -66,12 +74,21 @@ Test: Tools
 - In a temp project, run a command that calls `shell` to `echo` a file and `git status`.
 - Confirm output is summarized [4]. If `shell` is unavailable, provide a manual inspection step instead.
 
+Optional Features (Accordion Design)
+All advanced features are opt-in and never forced:
+- **Vibe Definition**: Define creative direction in `.claude/vibe.md` (offered during init)
+- **TDD Mode**: Generate precode test stubs (offered during plan)
+- **Comprehensive Docs**: Full open-source structure via `/docs:scaffold-advanced`
+- **Decision Logging**: Track architectural decisions via `/docs:decision`
+- **Progress Tracking**: PROGRESS.md auto-generated (always enabled for agent context)
+
 Local Policies
 - Keep prompts terse with crisp acceptance tests [4][6].
 - Prefer patch edits over complex generators [6].
 - Document new tool/flag usage here with a rationale and citation.
-- For in-between work:
-  - Use `/ops:route` to decide next step if unsure.
-  - Use `/docs:readme` to maintain docs.
-  - Use `/ops:adhoc` for one-off, minimal changes.
+- **Workflow shortcuts**:
+  - Use `/project:next` for autopilot (recommended)
+  - Use `/ops:route` to decide next step if unsure
+  - Use `/docs:readme` to maintain docs
+  - Use `/ops:adhoc` for one-off, minimal changes
 
