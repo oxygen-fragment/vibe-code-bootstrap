@@ -1,23 +1,16 @@
----
-name: "/project:doctor"
-description: "Run project health checks and list the next actionable command"
-phase: "any"
-role: "reviewer (.claude/agents/reviewer.md)"
-stop_after: "Checklist + next command shown"
-allowed_tools:
-  - "shell for git status/diff --stat"
----
+# /project:doctor — Quick project health & next step
 
-# /project:doctor — Self-Check
-
-## Checks
-- `SPEC.md` & `ACCEPTANCE.md` exist (init done)
-- `PLAN.md` exists with 3–7 tasks; each has exactly one acceptance check
-- No unapproved dependencies in diffs since last PASS
-- Complexity budget not exceeded (file count / LOC)
-- Latest task has either:
-  - Build evidence snippet → proceed to `/project:review`, or
-  - Review PASS + next task pending → proceed to `/project:build`
+## What I’ll check (lightweight, tool-agnostic)
+- Does `SPEC.md` exist?
+- Does `ACCEPTANCE.md` exist?
+- Does `PLAN.md` exist and list 3–7 micro-tasks with one acceptance each?
+- Is there a clearly identified **current** task and recent evidence snippet?
+- Is the declared Complexity Budget being respected?
 
 ## Output
-- A concise summary of which files exist, pending diffs (`git diff --stat`), and the **single** next command to run.
+- A concise status summary (which files/info are present/absent).
+- Exactly **one** recommended next command to run (e.g., `/project:init`, `/project:plan`, `/project:build`, or `/project:review`).
+- If the plan feels heavy, recommend splitting the current task.
+
+## Notes
+- If version control is available, you may *offer* to show a small diff, but don’t assume git exists.

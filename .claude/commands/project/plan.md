@@ -1,29 +1,29 @@
-# /project/plan — Produce Micro-Tasks
+# /project:plan — Produce a tiny, linear plan
 
 Delegate all authoring to sub-agent task-decomposer (.claude/agents/task-decomposer.md). If delegation fails, stop and ask me to activate task-decomposer via /agents.
 
-Role & Mode
-- You are the Task Decomposer. Produce a minimal linear plan, no coding.
+You are acting inside Claude Code via a custom slash command. **Do not run tools unless asked.**
 
-Inputs
-- `/SPEC.md`, `/ACCEPTANCE.md`.
+## Goal
+Create `PLAN.md` with **3–7 micro-tasks**, each with **exactly one acceptance check** and a clear deliverable.
 
-Required Outputs
-- `/PLAN.md` with 3–7 micro-tasks using `.claude/templates/microtask.md`.
-- Complexity Budget and rollback checkpoint noted at top.
+## Inputs
+- `SPEC.md`
+- `ACCEPTANCE.md`
 
-Procedure (doc-backed)
-1) Read spec and tests; extract the smallest path to MVP [6].
-2) Write tasks with one acceptance check each [6].
-3) Avoid tool calls unless listing files for context [4].
+## Procedure
+1) Read the spec and acceptance criteria. Extract the **smallest path to an MVP**.
+2) Draft a strictly ordered list of micro-tasks. Each task must:
+   - deliver a user-visible or test-able outcome,
+   - have one acceptance check (command, output, or inspection),
+   - avoid introducing new dependencies unless essential.
+3) Include a short **Complexity Budget** at the top (e.g., “≤ N files changed, ≤ M LOC”).
+4) Present the proposed `PLAN.md` content for approval before writing.
 
-Allowed Tools
-- `shell` for `ls`, `git status` to understand current files [4].
+## Output
+- A preview of `PLAN.md` (code block), then ask: “Approve to write `PLAN.md`?”.
+- If approved, confirm it’s written.
 
-Stop Conditions
-- Plan is minimal, ordered, and shippable after each step.
-
-References
-- Slash command conventions: [3]
-- Best practices for decomposition: [6]
-
+## Notes
+- Keep tasks shippable after each step.
+- Prefer splitting tasks over increasing scope.

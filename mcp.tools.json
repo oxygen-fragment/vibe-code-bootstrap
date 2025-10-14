@@ -1,0 +1,48 @@
+{
+  "note": "All MCP servers are optional. This mapping documents intended defaults for agents/commands; it does not configure your editor. The boilerplate works without any external MCP servers.",
+  "agents": {
+    "spec-writer": [
+      "memory",
+      "filesystem",
+      "context7"
+    ],
+    "task-decomposer": [
+      "memory",
+      "filesystem",
+      "context7"
+    ],
+    "coder": [
+      "memory",
+      "filesystem",
+      "context7",
+      "shell"
+    ],
+    "reviewer": [
+      "memory",
+      "filesystem",
+      "context7",
+      "shell"
+    ]
+  },
+  "commands": {
+    "/project:init": [],
+    "/project:plan": [],
+    "/project:build": [
+      "shell for smallest test/CLI validation",
+      "editor/patch for minimal diffs"
+    ],
+    "/project:review": [
+      "shell for git status/diff and smallest confirming checks",
+      "editor/patch only for revert or tiny fix"
+    ]
+  },
+  "descriptions": {
+    "filesystem": "filesystem MCP: Create/edit project files and docs",
+    "memory": "memory MCP: Retrieve prior decisions, constraints, guardrails",
+    "context7": "context7 MCP: Maintain session context, decisions, and focus",
+    "shell": "shell MCP: Run smallest validating commands",
+    "editor/patch": "editor/patch: Apply minimal diffs when needed",
+    "octocode": "octocode MCP: Static analysis, linting, and code intelligence",
+    "sequential-thinking": "sequential-thinking MCP: Stepwise reasoning for multi-step tasks"
+  }
+}

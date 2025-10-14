@@ -1,25 +1,16 @@
----
-name: "/project:help"
-description: "Explain the 4-phase workflow and how to proceed when stuck"
-phase: "any"
-role: "spec-writer (.claude/agents/spec-writer.md)"
-stop_after: "Help text displayed with next action"
-allowed_tools: []
----
+# /project:help — How this 4-step flow works
 
-# /project:help — How this works
+**Order of operations**
+1) `/project:init` → Draft/confirm `SPEC.md` + `ACCEPTANCE.md`
+2) `/project:plan` → Draft/confirm `PLAN.md` (3–7 micro-tasks, one check each)
+3) `/project:build` → Implement exactly **one** task with smallest diff + evidence
+4) `/project:review` → PASS/FAIL against acceptance + simplicity + budget
 
-**What to run, in order**
-1) `/project:init` → Writes `/SPEC.md` and `/ACCEPTANCE.md`
-2) `/project:plan` → Writes `/PLAN.md` (3–7 tiny tasks)
-3) `/project:build` → Implements exactly ONE task from `/PLAN.md`
-4) `/project:review` → PASS/FAIL and tell you the next thing to do
-
-**If a command doesn't use the right agent**
-- Run `/agents`, select the agent (spec-writer / task-decomposer / coder / reviewer)
-- Then paste the command body
-- Or run `/project:doctor` for quick checks
+**Stuck? Try this**
+- Run `/project:doctor` to see what’s missing and the single next step.
+- If a command needs a different “voice,” just say so (e.g., “review this like a strict tester”).
+- When in doubt, reduce scope or split the task.
 
 **What “good” looks like**
-- Tiny scope, one acceptance per task, minimal diffs, no surprise deps
-- If it feels heavy: split tasks; defer nice-to-haves
+- Minimal changes, no surprise dependencies, clear evidence per task.
+- Each step leaves the project in a usable state.

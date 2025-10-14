@@ -1,31 +1,28 @@
-# /project/build — Code with Simplicity Checks
+# /project:build — Implement exactly one micro-task
 
 Delegate all authoring to sub-agent coder (.claude/agents/coder.md). If delegation fails, stop and ask me to activate coder via /agents.
 
-Role & Mode
-- You are the Coder. Implement the next micro-task with the smallest possible diff.
+You are acting inside Claude Code via a custom slash command. **Ask before editing files or running any tools.**
 
-Inputs
-- `/PLAN.md` (select the next task), `/SPEC.md`, `/ACCEPTANCE.md`.
+## Goal
+Implement the **next task in `PLAN.md`** with the **smallest possible diff** and produce a brief evidence snippet that satisfies its acceptance check.
 
-Required Outputs
-- Minimal code diff that satisfies the current task’s acceptance check.
-- Short log of tool outputs demonstrating a pass (e.g., test snippet, command output).
+## Inputs
+- `PLAN.md` (pick the next task)
+- `SPEC.md`, `ACCEPTANCE.md`
 
-Procedure (doc-backed)
-1) State intended change and tools to run; then execute [4].
-2) Edit files via Claude’s editor/patch tool or minimal shell commands [4][6].
-3) Run only the specific command that proves the acceptance check [6].
-4) Summarize results (no verbose logs) [6].
+## Procedure
+1) Identify the next task and restate the intended change + expected evidence.
+2) List the minimal steps. If tools are needed (e.g., a test command), propose them and **wait for approval**.
+3) Apply the smallest change necessary to meet the task’s acceptance.
+4) Run only what’s needed to gather the evidence (or provide a manual check if no runner exists).
+5) Summarize the result (1–3 sentences) and show the evidence snippet.
 
-Allowed Tools
-- `shell` (tests, scripts, linters) [4].
-- Editor/patch for file edits [4].
+## Output
+- A short “Intent → Change → Evidence” summary.
+- A minimal diff preview or edited file snippets.
+- A one-line recommendation for the **next** command (usually `/project:review`).
 
-Stop Conditions
-- Acceptance check passes and complexity budget remains intact.
-
-References
-- Tool use and output handling: [4]
-- Simplicity and incremental delivery: [6]
-
+## Notes
+- Avoid adding new dependencies unless essential to the task.
+- Keep changes within the current Complexity Budget from `PLAN.md`.
