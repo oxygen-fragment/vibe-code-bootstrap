@@ -9,11 +9,25 @@ Overview
 - Progress tracking: PROGRESS.md auto-generated for agent-to-agent context
 - Guardrails: no new deps (by default), small diffs, MVP-first, fast rollback
 
-Add To Your Project (copy these files)
-- Required: copy `template/.claude/` folder and `template/CLAUDE.md` into the root of your own project (your repository).
-- Recommended (for guided setup): also copy `vibe_bootstrap.sh`, the `scripts/` folder, `template/mcp.tools.json`, and the `template/templates/` folder. These add the one‑liner setup and onboarding helper.
-- That's it — no other tools or servers are required.
-- Note: The root `.claude/` directory in this repo is for vibe-bootstrap development only; user projects get the distribution from `template/`.
+Install Into Your Project
+
+**Quick Install (Recommended):**
+```bash
+# From vibe-code-bootstrap repo:
+bash install.sh /path/to/your/project
+```
+
+**Manual Install:**
+```bash
+# From your project directory:
+cd /path/to/your/project
+cp -r /path/to/vibe-code-bootstrap/template/.claude .
+cp /path/to/vibe-code-bootstrap/template/CLAUDE.md .
+```
+
+**📖 See [QUICKSTART.md](QUICKSTART.md) for complete installation guide and first-session walkthrough.**
+
+**Note:** The root `.claude/` directory in this repo is for vibe-bootstrap development only; user projects get the distribution from `template/`.
 
 Prerequisites
 - Claude Code CLI installed and authenticated. See Anthropic docs: Overview/CLI Reference/Setup/Slash Commands/Tool Use/Best Practices.
@@ -24,13 +38,16 @@ Prerequisites
   - https://docs.anthropic.com/en/docs/agents-and-tools/tool-use/overview (tool use)
   - https://www.anthropic.com/engineering/claude-code-best-practices (best practices)
 
-Non-Technical Quick Start (no extra setup)
-- First, copy `template/.claude/` + `template/CLAUDE.md` (and optionally `vibe_bootstrap.sh` + `scripts/`) into your project folder.
-- No MCP servers required. This works out-of-the-box using Claude Code's local tools.
-- Easiest path: run `bash vibe_bootstrap.sh` (no need for chmod), then paste `/project:init` into Claude Code.
-- Non-interactive: `bash vibe_bootstrap.sh --defaults` (applies defaults and offers onboarding).
-- In an interactive terminal, the script offers to run onboarding immediately.
-- If a `.gitignore` is missing, the script can create a minimal one for you.
+Getting Started in Your Project
+
+**See [QUICKSTART.md](QUICKSTART.md) for complete installation instructions and real-world examples.**
+
+**TL;DR:**
+1. Install: `bash install.sh /path/to/your/project`
+2. Start: `cd /path/to/your/project && claude .claude/commands/project/next.md`
+3. Follow autopilot guidance until your MVP is complete
+
+No MCP servers required. Works out-of-the-box with Claude Code's built-in tools.
 
 Quick Start (Autopilot Mode - Recommended)
 1) Verify CLI: `claude --help`
