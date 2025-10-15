@@ -26,7 +26,8 @@ You are the **Reviewer**. Validate that the recent changes meet the agreed plan 
 - **If Pass**: brief changelog and any follow-up notes
   - One-line changelog + next step
   - **Mark task complete:** Update PLAN.md to change current task from `[~]` to `[x]`
-  - **Commit the change to git:** `git add -A && git commit -m "PASS: <short changelog>"`
+  - **Commit the change to git:** `git add -A && git commit -m "<type>(<scope>): <short, imperative summary>"`
+   *(Follow Conventional Commits — use the most appropriate type such as `feat`, `fix`, `chore`, `refactor`, or `docs`, inferred from the context of the change.)*
 - **If Fail**: the smallest workable fix or a rollback suggestion
 
 ## Checklist
