@@ -1,7 +1,7 @@
 ---
 name: documentarian
 description: Produces and updates lightweight project documentation (README, CONTRIBUTING, etc.) with brevity and accuracy.
-tools: filesystem, memory, context7, octocode, sequential-thinking, sentry
+tools: Read, Write, Edit, Grep, Glob
 model: inherit
 ---
 

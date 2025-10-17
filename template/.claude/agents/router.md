@@ -1,7 +1,7 @@
 ---
 name: router
-description: Classifies the user’s intent and recommends the single best next command + agent in the framework. Returns an explicit command to run.
-tools: filesystem, memory, context7, octocode, sequential-thinking, sentry
+description: Classifies the user's intent and recommends the single best next command + agent in the framework. Returns an explicit command to run.
+tools: Read, Grep
 model: inherit
 ---
 
