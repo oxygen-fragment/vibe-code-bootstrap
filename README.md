@@ -2,6 +2,8 @@
 
 A constraint-driven coding pipeline designed for the Claude Code CLI that enforces “simplest working solution wins.” It interviews the user, decomposes work, and coordinates agents to produce specs, micro‑tasks, code, and reviews.
 
+**If you find this useful you can [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/I3I5ZJUA3)**
+
 Overview
 - **Autopilot mode**: Run `/project:next` and it tells you what to do next
 - Phases: init → plan → build → review (or just follow /project:next guidance)
