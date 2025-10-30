@@ -1,0 +1,58 @@
+# OS artifacts
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Python
+__pycache__/
+.pytest_cache/
+.venv/
+venv/
+.python-version
+.coverage
+.mypy_cache/
+.ruff_cache/
+
+# Node
+node_modules/
+.pnpm-store/
+
+# Build artifacts
+dist/
+build/
+.cache/
+
+# Editors/IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Security assessment artifacts (don't commit)
+.trivy-results.json
+security-scan-*.txt
+
+# Optional: IDE-specific files
+.project
+.pydevproject
+.settings/
+*.code-workspace
+
+# Screenshots and reference documents
+*.png
+*.jpg
+*.jpeg
+*.pdf
+Empirical and Practical Methodologies for Vibe Coding.md
+Project Kickoff Documentation*.pdf

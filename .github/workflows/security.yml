@@ -1,0 +1,132 @@
+name: Security Scanning
+
+# Lightweight security checks for a template repository
+# Feel free to disable or customize based on your needs
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  security-events: write
+  pull-requests: write
+
+jobs:
+  secret-scanning:
+    name: Secret Detection
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for secret scanning
+
+      - name: TruffleHog Secret Scan
+        uses: trufflesecurity/trufflehog@main
+        with:
+          path: ./
+          base: ${{ github.event.repository.default_branch }}
+          head: HEAD
+          extra_args: --debug --only-verified
+
+      - name: Gitleaks Secret Scan
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }}
+
+  shell-security:
+    name: Shell Script Security
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run ShellCheck
+        uses: ludeeus/action-shellcheck@master
+        with:
+          severity: warning
+          scandir: './scripts'
+          additional_files: 'install.sh'
+
+      - name: Run shellcheck on all shell scripts
+        run: |
+          find . -name "*.sh" -type f -exec shellcheck --severity=warning {} +
+
+  python-security:
+    name: Python Security Scan
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Bandit
+        run: pip install bandit[toml]
+
+      - name: Run Bandit security linter
+        run: |
+          # Only scan if scripts directory exists
+          if [ -d scripts/ ]; then
+            bandit -r scripts/ -f screen || true
+          else
+            echo "No scripts directory found, skipping Python security scan"
+          fi
+
+
+  file-permissions:
+    name: Check File Permissions
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check for executable files
+        run: |
+          echo "Checking for suspicious executable files..."
+          find . -type f -executable -not -path "./.git/*" -not -path "./node_modules/*" | while read file; do
+            if [[ ! "$file" =~ \.(sh|py)$ ]]; then
+              echo "WARNING: Unexpected executable file: $file"
+              exit 1
+            fi
+          done
+
+      - name: Check file ownership
+        run: |
+          echo "Checking for files with suspicious permissions..."
+          find . -type f -perm /go+w -not -path "./.git/*" | while read file; do
+            echo "WARNING: World-writable file found: $file"
+          done
+
+  security-summary:
+    name: Security Summary
+    runs-on: ubuntu-latest
+    needs: [secret-scanning, shell-security, python-security, file-permissions]
+    if: always()
+    steps:
+      - name: Check job results
+        run: |
+          echo "Security scan summary:"
+          echo "Secret scanning: ${{ needs.secret-scanning.result }}"
+          echo "Shell security: ${{ needs.shell-security.result }}"
+          echo "Python security: ${{ needs.python-security.result }}"
+          echo "File permissions: ${{ needs.file-permissions.result }}"
+
+          if [[ "${{ needs.secret-scanning.result }}" == "failure" ]] || \
+             [[ "${{ needs.shell-security.result }}" == "failure" ]] || \
+             [[ "${{ needs.python-security.result }}" == "failure" ]] || \
+             [[ "${{ needs.file-permissions.result }}" == "failure" ]]; then
+            echo "❌ Security checks failed"
+            exit 1
+          else
+            echo "✅ All security checks passed"
+          fi
