@@ -25,6 +25,8 @@ bash install.sh /path/to/your/project
 cd /path/to/your/project
 cp -r /path/to/vibe-code-bootstrap/template/.claude .
 cp /path/to/vibe-code-bootstrap/template/CLAUDE.md .
+mkdir -p templates
+cp -r /path/to/vibe-code-bootstrap/template/templates/* templates/
 ```
 
 **📖 See [QUICKSTART.md](QUICKSTART.md) for complete installation guide and first-session walkthrough.**

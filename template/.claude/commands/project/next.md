@@ -46,8 +46,10 @@ Apply these rules **in order** (first match wins):
 - **How to check:** All tasks in PLAN.md are checked `[x]` or "Status: completed"
 
 ### 5. MVP is complete (ACCEPTANCE.md criteria all pass)
-→ **Suggest feature freeze or new planning**
-- Message: "🎉 MVP complete! Your acceptance criteria pass. Options:\n  - Run `/project:doctor` to check project health\n  - Start new feature: Run `/project:init` to create SPEC-v2.md\n  - Add docs: Run `/docs:readme` to update documentation\n  - Close this milestone and celebrate!"
+→ **Run `/project:init`**
+- Reason: Start the next scoped iteration with a fresh spec (for example `SPEC-v2` goals).
+- Agent: spec-writer
+- What it does: Captures the next feature set in a clear, beginner-friendly spec and acceptance criteria.
 
 ### 6. Unclear state (edge case)
 → **Run `/project:doctor`**

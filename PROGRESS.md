@@ -47,3 +47,11 @@ This file tracks workflow progression for vibe-code-bootstrap.
 **Files:** template/templates/project-profile.yml (created), template/.claude/commands/project/{init,plan,build,review,next}.md (updated), template/.claude/agents/{spec-writer,task-decomposer}.md (updated), README.md (updated)
 **Evidence:** g checks confirm profile schema, adaptive sizing (3-7/8-15/16-30 + phased), and plain-language output structure across commands.
 **Outcome:** Bootstrap now supports beginner-safe project profiles with minimal-context guidance and scalable planning depth.
+
+### 2026-02-20 16:24 - /project:build
+**Agent:** coder
+**Status:** completed
+**Summary:** Applied minimal follow-up fixes from review findings
+**Files:** template/.claude/commands/project/init.md, template/.claude/commands/project/next.md, README.md
+**Evidence:** Init fallback now references 	emplates/project-profile.yml with embedded defaults; manual install now copies templates; /project:next heuristic 5 now returns one command (/project:init).
+**Outcome:** Review blockers resolved with minimal doc-only changes.

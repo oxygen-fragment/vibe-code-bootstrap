@@ -30,7 +30,9 @@ Minimum profile fields to capture in `.claude/project-profile.yml`:
 - `dependency_policy`
 - `tone`
 
-If user skips or is unsure, write safe default values from `template/templates/project-profile.yml`.
+If user skips or is unsure, write safe default values from `templates/project-profile.yml`.
+If that file is missing (for example in minimal installs), use embedded safe defaults:
+`workflow_mode: guided`, `testing_mode: balanced`, `risk_level: low`, `dependency_policy: no_new_deps_for_mvp`, `tone: plain_language`.
 
 ## Procedure
 1) Run beginner onboarding and draft `.claude/project-profile.yml` (multiple-choice, low-jargon).
