@@ -29,7 +29,7 @@ Apply these rules **in order** (first match wins):
 → **Run `/project:plan`**
 - Reason: Specification is ready, need to break down into micro-tasks
 - Agent: task-decomposer
-- What it does: Creates PLAN.md with 3-7 ordered micro-tasks
+- What it does: Creates PLAN.md with adaptive micro-task count (simple/medium/complex)
 
 ### 3. PLAN.md exists with incomplete tasks
 → **Run `/project:build`**
@@ -106,6 +106,11 @@ Run: /project:build
 
 **Agent:** coder
 ```
+
+Use plain language and this 3-part structure:
+- **What happened**
+- **Why it matters**
+- **What to do next**
 
 ## Notes
 

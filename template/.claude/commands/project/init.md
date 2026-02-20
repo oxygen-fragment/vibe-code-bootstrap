@@ -9,6 +9,7 @@ Create or update two lightweight docs at the project root:
 - `SPEC.md` — problem, constraints, non-goals
 - `ACCEPTANCE.md` — clear, testable checks
 - `.claude/vibe.md` — (optional) creative direction and tone guide
+- `.claude/project-profile.yml` — beginner-friendly project customization defaults
 
 ## Inputs to collect (keep it tight)
 - One-sentence product intent
@@ -16,18 +17,38 @@ Create or update two lightweight docs at the project root:
 - Target runtime/language (if any)
 - Constraints (deps, hosting, privacy/security)
 - Known risks/unknowns (include at least one “verification needed” item)
+- 3-5 multiple-choice onboarding preferences (layman-friendly)
+
+## Beginner-Friendly Onboarding (Required)
+Ask 3-5 plain-language multiple-choice questions before drafting docs.
+Include one-line implications for each choice.
+
+Minimum profile fields to capture in `.claude/project-profile.yml`:
+- `workflow_mode`
+- `testing_mode`
+- `risk_level`
+- `dependency_policy`
+- `tone`
+
+If user skips or is unsure, write safe default values from `template/templates/project-profile.yml`.
 
 ## Procedure
-1) Brief interview: ask only what’s necessary to draft SPEC + ACCEPTANCE.
-2) Reflect back a short summary. **Wait for user approval.**
-3) If `SPEC.md`/`ACCEPTANCE.md` already exist, propose **minimal edits** instead of rewrites.
-4) On approval, draft `SPEC.md` and `ACCEPTANCE.md`. Keep both concise and specific.
-5) List one small command or check the user can run to verify each acceptance item.
+1) Run beginner onboarding and draft `.claude/project-profile.yml` (multiple-choice, low-jargon).
+2) Brief interview: ask only what’s necessary to draft SPEC + ACCEPTANCE.
+3) Reflect back a short summary. **Wait for user approval.**
+4) If `SPEC.md`/`ACCEPTANCE.md` already exist, propose **minimal edits** instead of rewrites.
+5) On approval, draft `SPEC.md` and `ACCEPTANCE.md`. Keep both concise and specific.
+6) List one small command or check the user can run to verify each acceptance item.
 
 ## Output
 - A succinct recap of what you captured.
 - Either: “Proposed SPEC/ACCEPTANCE below—confirm to write,” *or* “Suggested edits below—confirm to apply.”
 - The exact file contents you intend to write (in fenced code blocks).
+
+Use plain language and this 3-part structure:
+- **What happened**
+- **Why it matters**
+- **What to do next**
 
 ## Progress Logging
 

@@ -29,6 +29,11 @@ Decide PASS/FAIL for the **latest completed task** based on:
 - If FAIL: the minimal corrective step(s) and what evidence will prove it.
 - The exact next command to run (e.g., `/project:build` or `/project:plan` to split).
 
+Use plain language and this 3-part structure:
+- **What happened**
+- **Why it matters**
+- **What to do next**
+
 ## Progress Logging
 
 After completing the review, append a progress entry to `PROGRESS.md`:

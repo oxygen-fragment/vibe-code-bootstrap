@@ -23,6 +23,11 @@ Implement the **next task in `PLAN.md`** with the **smallest possible diff** and
 - A minimal diff preview or edited file snippets.
 - A one-line recommendation for the **next** command (usually `/project:review`).
 
+Use plain language and this 3-part structure:
+- **What happened**
+- **Why it matters**
+- **What to do next**
+
 ## Progress Logging
 
 After attempting to implement the task, append a progress entry to `PROGRESS.md`:

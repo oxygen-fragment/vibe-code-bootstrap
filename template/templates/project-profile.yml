@@ -1,0 +1,18 @@
+# Project Profile (Layman-Friendly Defaults)
+#
+# Created by /project:init.
+# Purpose: keep customization compact so agents can read minimal context.
+# If user skips onboarding questions, use these safe defaults.
+
+workflow_mode: guided
+testing_mode: balanced
+risk_level: low
+dependency_policy: no_new_deps_for_mvp
+tone: plain_language
+
+# Optional notes captured from onboarding
+target_runtime: ""
+user_goal: ""
+constraints: []
+
+# safe default: all fields above are conservative and beginner-friendly

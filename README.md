@@ -73,7 +73,10 @@ If you prefer explicit control, run commands directly:
    - Optional: Define project vibe in `.claude/vibe.md`
 
 2) **Plan**: `claude .claude/commands/project/plan.md`
-   - Produces `PLAN.md` with 3–7 micro-tasks
+   - Produces `PLAN.md` with adaptive micro-task count by complexity:
+     - simple: 3-7
+     - medium: 8-15
+     - complex: 16-30 (or phased plans)
    - Optional: Generate precode test stubs for TDD mode
 
 3) **Build**: `claude .claude/commands/project/build.md`
@@ -110,6 +113,12 @@ All advanced features are **opt-in** and never forced:
 - **Comprehensive Docs**: Create full open-source structure with `/docs:scaffold-advanced`
 - **Decision Logging**: Track architectural decisions with `/docs:decision`
 - **Progress Tracking**: PROGRESS.md auto-generated (always enabled for agent context)
+
+Layman-Friendly Customization and Token Efficiency
+- `/project:init` can create `.claude/project-profile.yml` using beginner-friendly multiple-choice setup.
+- Profile defaults are safe default values when users skip technical choices.
+- Agents/commands read minimal context (profile + required task files) to reduce token use.
+- `/project:plan` uses adaptive microtask sizing so complexity is handled without overloading simple projects.
 
 Available Commands
 

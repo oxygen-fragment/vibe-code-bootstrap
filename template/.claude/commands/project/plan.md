@@ -5,7 +5,12 @@ Delegate all authoring to sub-agent task-decomposer (.claude/agents/task-decompo
 You are acting inside Claude Code via a custom slash command. **Do not run tools unless asked.**
 
 ## Goal
-Create `PLAN.md` with **3–7 micro-tasks**, each with **exactly one acceptance check** and a clear deliverable.
+Create `PLAN.md` with adaptive micro-task count based on complexity, each with **exactly one acceptance check** and a clear deliverable.
+Use these target ranges:
+- **Simple:** 3-7
+- **Medium:** 8-15
+- **Complex:** 16-30
+- If >30 estimated tasks, split into phased plans.
 
 ## Inputs
 - `SPEC.md`
@@ -13,17 +18,24 @@ Create `PLAN.md` with **3–7 micro-tasks**, each with **exactly one acceptance 
 
 ## Procedure
 1) Read the spec and acceptance criteria. Extract the **smallest path to an MVP**.
-2) Draft a strictly ordered list of micro-tasks. Each task must:
+2) Classify complexity tier (simple/medium/complex) and state why.
+3) Choose task count range matching the tier.
+4) Draft a strictly ordered list of micro-tasks. Each task must:
    - deliver a user-visible or test-able outcome,
    - have one acceptance check (command, output, or inspection),
    - avoid introducing new dependencies unless essential.
-3) Include a short **Complexity Budget** at the top (e.g., “≤ N files changed, ≤ M LOC”).
-4) Present the proposed `PLAN.md` content for approval before writing.
+5) Include a short **Complexity Budget** at the top (e.g., “≤ N files changed, ≤ M LOC”).
+6) Present the proposed `PLAN.md` content for approval before writing.
 
 ## Output
 - A preview of `PLAN.md` (code block), then ask: "Approve to write `PLAN.md`?".
 - If approved, ask about TDD mode (see below).
 - Confirm PLAN.md is written (and tests if applicable).
+
+Use plain language and this 3-part structure:
+- **What happened**
+- **Why it matters**
+- **What to do next**
 
 ## Optional: Test-Driven Development Mode
 
