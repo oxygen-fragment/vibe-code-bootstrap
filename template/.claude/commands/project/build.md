@@ -14,9 +14,11 @@ Implement the **next task in `PLAN.md`** with the **smallest possible diff** and
 ## Procedure
 1) Identify the next task and restate the intended change + expected evidence.
 2) List the minimal steps. If tools are needed (e.g., a test command), propose them and **wait for approval**.
-3) Apply the smallest change necessary to meet the task’s acceptance.
-4) Run only what’s needed to gather the evidence (or provide a manual check if no runner exists).
-5) Summarize the result (1–3 sentences) and show the evidence snippet.
+3) Update task marker in `PLAN.md` from `[ ]` to `[~]` before implementation.
+4) Apply the smallest change necessary to meet the task’s acceptance.
+5) Run only what’s needed to gather the evidence (or provide a manual check if no runner exists).
+6) On success, update task marker in `PLAN.md` to `[x]`. On failure, revert marker to `[ ]`.
+7) Summarize the result (1–3 sentences) and show the evidence snippet.
 
 ## Output
 - A short “Intent → Change → Evidence” summary.
@@ -102,3 +104,4 @@ Run '/project:plan' to adjust the plan, or '/project:doctor' for diagnostics.
 - Avoid adding new dependencies unless essential to the task.
 - Keep changes within the current Complexity Budget from `PLAN.md`.
 - Always log progress, even for failures—it helps agents learn what didn't work
+- Keep `PLAN.md` status markers accurate before writing `PROGRESS.md`.

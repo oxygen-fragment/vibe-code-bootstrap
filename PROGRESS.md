@@ -55,3 +55,11 @@ This file tracks workflow progression for vibe-code-bootstrap.
 **Files:** template/.claude/commands/project/init.md, template/.claude/commands/project/next.md, README.md
 **Evidence:** Init fallback now references 	emplates/project-profile.yml with embedded defaults; manual install now copies templates; /project:next heuristic 5 now returns one command (/project:init).
 **Outcome:** Review blockers resolved with minimal doc-only changes.
+
+### 2026-02-20 16:32 - /project:build
+**Agent:** coder
+**Status:** completed
+**Summary:** Implemented explicit task-status tracking workflow in PLAN and command templates
+**Files:** PLAN.md, README.md, template/.claude/commands/project/{plan,build,review}.md, template/.claude/agents/task-decomposer.md, template/templates/microtask.md
+**Evidence:** Status markers ([ ]/[~]/[x]) now required in planning templates and enforced in build/review instructions; current PLAN.md now marks all tasks complete.
+**Outcome:** This project and generated projects now have unambiguous done/in-progress/pending tracking.

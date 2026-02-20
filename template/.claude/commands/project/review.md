@@ -20,6 +20,7 @@ Decide PASS/FAIL for the **latest completed task** based on:
    - Acceptance satisfied?
    - Simplicity maintained (no gratuitous scope/new deps)?
    - Complexity Budget respected?
+   - `PLAN.md` task marker updated correctly (`[x]` for completed work)?
 3) Verdict:
    - **PASS** → Provide a one-line changelog entry and suggest the next task.
    - **FAIL** → Name the smallest fix or immediate revert, and propose a simpler alternative.
@@ -113,3 +114,4 @@ Run the recommended fix, then re-run '/project:review'
 ## Notes
 - Keep feedback specific and actionable. No long lectures.
 - Always log reviews—they provide critical gate-check history for future decisions
+- If marker state is wrong, require correction before PASS.

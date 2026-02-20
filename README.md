@@ -9,6 +9,7 @@ Overview
 - Phases: init → plan → build → review (or just follow /project:next guidance)
 - Roles: spec-writer → task-decomposer → coder → reviewer
 - Progress tracking: PROGRESS.md auto-generated for agent-to-agent context
+- Task tracking: `PLAN.md` uses status markers (`[ ]` pending, `[~]` in progress, `[x]` completed)
 - Guardrails: no new deps (by default), small diffs, MVP-first, fast rollback
 
 Install Into Your Project
@@ -146,6 +147,7 @@ Typical Flow
 - **Autopilot**: Run `/project:next` repeatedly until MVP complete
 - **Manual**: init → plan → (build → review) × N → feature-freeze
 - **All workflows**: Auto-generate `PROGRESS.md` for agent context
+- **Status discipline**: Keep `PLAN.md` markers updated before each `PROGRESS.md` entry
 
 Verification & Troubleshooting
 - CLI flags and command discovery: run `claude --help`. If path-based execution is unsupported, open the Markdown file in Claude Code and run it as a slash command.

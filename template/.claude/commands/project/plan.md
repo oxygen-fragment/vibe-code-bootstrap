@@ -12,6 +12,15 @@ Use these target ranges:
 - **Complex:** 16-30
 - If >30 estimated tasks, split into phased plans.
 
+## Task Status Markers (Required)
+Use explicit status markers on every task line:
+- `[ ]` pending
+- `[~]` in progress
+- `[x]` completed
+
+Example:
+`### [ ] Task 1: Create API skeleton`
+
 ## Inputs
 - `SPEC.md`
 - `ACCEPTANCE.md`
@@ -31,6 +40,7 @@ Use these target ranges:
 - A preview of `PLAN.md` (code block), then ask: "Approve to write `PLAN.md`?".
 - If approved, ask about TDD mode (see below).
 - Confirm PLAN.md is written (and tests if applicable).
+- Include a short status summary: `completed / in-progress / pending`.
 
 Use plain language and this 3-part structure:
 - **What happened**
